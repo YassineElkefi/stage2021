@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="../../assets/logo.png" alt="logo" width="50px"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-5">
+        <a class="nav-link" href="#">Ajout client</a>
+        <a class="nav-link" href="#">Ajout dépôt</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+<div class="container">
+    <div class="row" style="margin-bottom: 50px;">
+        <div class="card w-50 border-dark" style="margin:auto;">
+            <div class="card-body">
+                <form>
+                    <p style="font-style: italic; font-weight:500;">Ajout dépôt</p>
+                    <div class="mb-3">
+                      <label for="client" class="form-label">Client : </label>
+                      <select name="client" id="client">
+                        <option selected="Choisissez Client" value="">Choisissez Client</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="region" class="form-label">Région : </label>
+                        <select name="region" id="region">
+                          <option value="">Choisissez Région</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bp" class="form-label">Bureau de poste : </label>
+                        <select name="bp" id="bp">
+                          <option value="">Choisissez Bureau de poste</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="service" class="form-label">Service : </label>
+                      <select name="service" id="service">
+                        <option value="">Choisissez service</option>
+                      </select>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="montant" class="form-label">Montant : </label>
+                      <input type="text" class="form-control" id="mail" placeholder="Montant">
+                      <label for="nbre" class="form-label">Nombre d'envois : </label>
+                      <input type="text" class="form-control" id="nbre" placeholder="Nombre d'envois">
+                    </div>
+                    <div>
+                    <button type="submit" class="btn " id="val" style="background-color: #17A2B8;margin-left: 87%; color: white;">Ajouter</button>
+                    </div>
+                  </form>
+            </div>
+          </div>
+    </div>
+</div>

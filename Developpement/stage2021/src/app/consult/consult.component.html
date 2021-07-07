@@ -1,0 +1,60 @@
+<div class="sidenav">
+    <a href=""><img src="../../assets/logo.png" alt="logo" style="width: 250px;"></a>
+    <a href="#about" class="btn btn-outline-dark" style="position: relative; top: 80px;">Ajout clients</a>
+    <a href="#services"class="btn btn-outline-dark"style="position: relative; top: 150px;">Ajout dépôts</a>
+    <a href="#clients"class="btn btn-outline-dark"style="position: relative; top: 220px;">Consultation dépôts</a>
+    <a href="#contact"class="btn btn-outline-dark"style="position: relative; top: 290px;">Supression clients</a>
+    <p style="position:relative; top: 430px; text-align: center; color: #828282;">admin@admin.com</p>
+  </div>
+  
+<div class="main" style="background: #FDE7E7;">
+    <button class="btn btn-outline-dark" style="position: relative;top: 45px;left: 80px;" onclick="f1()"><p>Voir filtres</p></button>
+    <div class="container">
+        <div class="row" style="margin-bottom: 50px;">
+            <div class="card w-100 border-dark" style="margin-top: 50px;" id="myDIV">
+                <div class="card-body">
+                    <form>
+                        <p>Filtrer par : </p>
+
+                          <label for="client" class="form-label">Client : </label>
+                          <select name="client" id="client">
+                              <option value="">Choisissez client</option>
+                          </select>
+
+                            <label for="region" class="form-label"> Région : </label>
+                            <select name="region" id="reg">
+                                <option value="">Choisissez region</option>
+                            </select>
+
+                            <label for="bp" class="form-label">Bureau de poste : </label>
+                            <select name="bp" id="bp">
+                                <option value="">Choisissez Bureau poste</option>
+                            </select>
+                        <div class="mb-3" style="margin-top: 20px;">
+                          <label for="service" class="form-label">Service : </label>
+                          <select name="service" id="service">
+                              <option value="">Choisissez service</option>
+                          </select>
+
+                          <label for="date_s" class="form-label">De : </label>
+                          <input type="date" name="date_s" id="date_s">
+
+                          <label for="date_e" class="form-label">Jusqu'au : </label>
+                          <input type="date" name="date_e" id="date_e">
+                        </div>
+                        <div>
+                        <button type="submit" class="btn " id="fil" style="background-color: #17A2B8;margin-left: 87%; color: white;">Filtrer</button>
+                        </div>
+                      </form>
+                </div>
+              </div>
+        </div>
+    </div>
+    <p>Liste des dépôts :</p>
+    
+    <div style="text-align: center;">
+        <button class="btn btn-danger" style="position: relative; right: 60px;">Exporter PDF</button>
+        <button class="btn btn-success">Exporter CSV</button>
+    </div> 
+</div>
+

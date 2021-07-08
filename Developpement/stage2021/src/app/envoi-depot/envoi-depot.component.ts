@@ -31,13 +31,7 @@ export class EnvoiDepotComponent implements OnInit {
   }
   var id = (<HTMLOptionElement>document.getElementById("reg")).value;
 
-  const rep3 = await fetch(`http://127.0.0.1:8000/selectbp?id= ${id}`);
-    if (rep3.ok){
-      rep3.json().then(data =>{
-        this.bp = data;
-        console.log(this.bp)
-      })
-    }
+
     const rep4 = await fetch("http://127.0.0.1:8000/selects");
     if (rep4.ok){
       rep4.json().then(data =>{
@@ -46,5 +40,15 @@ export class EnvoiDepotComponent implements OnInit {
 
       })   
   }
+    }
+     async f1() {
+      var val=(<HTMLSelectElement>document.getElementById("reg")).value
+      const rep3 = await fetch(`http://127.0.0.1:8000/selectbp?id= ${val}`);
+      if (rep3.ok){
+        rep3.json().then(data =>{
+          this.bp = data;
+          console.log(this.bp)
+        })
+      }
     }
 }

@@ -29,8 +29,13 @@
                         <label for="region" class="form-label">Région : </label>
                         <select (change)="f1()" class="form-control form-control-lg" id="reg">
                           <option value="">Choisissez région</option>
+<<<<<<< HEAD
                           <option  *ngFor="let reg of region" value="{{reg.id_region}}">{{ reg.libelle_region}}</option>
                       </select>
+=======
+                          <option *ngFor="let reg of region">{{ reg.libelle_region}}</option>
+                        </select>
+>>>>>>> 4541379daaa85b66fa2021a1220a5b802d75b832
                     </div>
                     <div class="mb-3">
                         <label for="bp" class="form-label">Bureau de poste : </label>

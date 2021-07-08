@@ -29,9 +29,24 @@ export class EnvoiDepotComponent implements OnInit {
 
       })   
   }
+<<<<<<< HEAD
   var id = (<HTMLOptionElement>document.getElementById("reg")).value;
 
 
+=======
+  var id = (<HTMLOptionElement>document.getElementById("reg")).addEventListener("change", function() {
+    var id1=(<HTMLOptionElement>document.getElementById("reg")).value;
+    console.log(id1);
+  });
+  var id2=(<HTMLOptionElement>document.getElementById("reg")).value;
+  const rep3 = await fetch(`http://127.0.0.1:8000/selectbp?id= ${id2}`);
+    if (rep3.ok){
+      rep3.json().then(data =>{
+        this.bp = data;
+        console.log(this.bp)
+      })
+    } 
+>>>>>>> 4541379daaa85b66fa2021a1220a5b802d75b832
     const rep4 = await fetch("http://127.0.0.1:8000/selects");
     if (rep4.ok){
       rep4.json().then(data =>{

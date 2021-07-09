@@ -104,7 +104,8 @@ async def supp(request:Request):
     mydb = mysql.connector.connect(host = "localhost", user = "root" , password = "" , database = "stage2021")
     mycursor = mydb.cursor()
     body = json.loads(await request.body())
-    mycursor.execute(f"delete from `client` where `id_client`='{body['client']}';") 
+    mycursor.execute(f"SET FOREIGN_KEY_CHECKS =0;")
+    mycursor.execute(f"delete from `client` where `id_client`= {body['client']};") 
     mycursor.execute(f"ALTER TABLE `client` AUTO_INCREMENT=1;")
     mydb.commit()
     return {"OK"}

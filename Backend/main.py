@@ -1,3 +1,4 @@
+from re import MULTILINE
 from typing import Optional
 from fastapi import FastAPI , Request
 from fastapi.params import Body
@@ -87,4 +88,37 @@ def gets():
     json_data=[]
     for result in rv:
         json_data.append(dict(zip(row_headers,result)))
+    return json_data
+####################################################################################################################
+@app.post("/addepot")
+async def add(request:Request):
+    mydb = mysql.connector.connect(host = "localhost" , user = "root" , password = "" , database = "stage2021")
+    mycursor = mydb.cursor()
+    body = json.loads(await request.body())
+    mycursor.execute(f"INSERT INTO `depot`(`id_depot`,`service`, `bureau`, `client`,`date_envoi`, `montant`, `nombre`) VALUES(NULL, '{body['service']}', '{body['bureau']}', '{body['client']}',current_timestamp(),'{body['montant']}','{body['nombre']}');")
+    mydb.commit()
+    return {"OK"}
+####################################################################################################################
+@app.delete("/delcli")
+async def supp(request:Request):
+    mydb = mysql.connector.connect(host = "localhost", user = "root" , password = "" , database = "stage2021")
+    mycursor = mydb.cursor()
+    body = json.loads(await request.body())
+    mycursor.execute(f"delete from `client` where `id_client`='{body['client']}';") 
+    mycursor.execute(f"ALTER TABLE `client` AUTO_INCREMENT=1;")
+    mydb.commit()
+    return {"OK"}
+####################################################################################################################
+@app.post("/login")
+async def db_test(request : Request):
+    mydb = mysql.connector.connect(host = "localhost" , user = "root" , password = "" , database = "stage2021")
+    mycursor = mydb.cursor()
+    body = json.loads(await request.body())
+    print (body)
+    mycursor.execute(f"select * from agent  where (mail_ag = '{body['user']}') and (password = '{body['pwd']}')")
+    row_headers=[x[0] for x in mycursor.description] 
+    rv = mycursor.fetchall()
+    json_data=[]
+    for result in rv:
+            json_data.append(dict(zip(row_headers,result)))
     return json_data

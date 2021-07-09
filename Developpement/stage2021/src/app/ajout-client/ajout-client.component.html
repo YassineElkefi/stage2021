@@ -1,13 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src="../../assets/logo.png" alt="logo" width="50px"></a>
+      <a class="navbar-brand" routerLink="."><img src="../../assets/logo.png" alt="logo" width="50px"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-5">
-        <a class="nav-link" href="#">Ajout client</a>
-        <a class="nav-link" href="#">Ajout dépôt</a>
+        <a class="nav-link" routerLink=".">Ajout client</a>
+        <a class="nav-link" routerLink="../envoi-depot">Ajout dépôt</a>
+        <a class="nav-link" routerLink="" style="position: relative; left:480%;">Déconnexion</a>
         </div>
       </div>
     </div>

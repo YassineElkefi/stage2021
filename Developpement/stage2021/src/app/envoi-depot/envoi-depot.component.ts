@@ -48,4 +48,22 @@ export class EnvoiDepotComponent implements OnInit {
         })
       }
     }
+async Add(){
+  var srv = (<HTMLInputElement>document.getElementById("service")).value
+  var br = (<HTMLInputElement>document.getElementById("bp")).value
+  var cl = (<HTMLInputElement>document.getElementById("cli")).value
+  var m = (<HTMLInputElement>document.getElementById("mt")).value
+  var n = (<HTMLInputElement>document.getElementById("nbre")).value
+  var body = `{"client":"${cl}" , "bureau":"${br}" , "service":"${srv}" , "montant":"${m}", "nombre":"${n}"}` 
+  const rep = await fetch("http://127.0.0.1:8000/addepot" , {
+    method:"POST" , 
+    body : body
+  })
+  if (rep.ok){
+    rep.json().then((data)=>{
+      console.log(data)
+    })
+  }
+
+}
 }

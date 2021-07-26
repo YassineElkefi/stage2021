@@ -20,8 +20,14 @@
     "@angular/platform-browser-dynamic": "~11.2.3",
     "@angular/router": "~11.2.3",
     "bootstrap": "^5.0.0-beta3",
+    "file-saver": "^2.0.5",
+    "html2pdf.js": "^0.9.3",
+    "ng2-pdf-viewer": "^7.0.1",
+    "pdfmake": "^0.2.0",
     "rxjs": "~6.6.0",
+    "table2excel": "^1.0.4",
     "tslib": "^2.0.0",
+    "xlsx": "^0.17.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {

@@ -43,7 +43,7 @@ export class AuthComponent implements OnInit {
               
             }
             else{
-              alert("Wrong Coordinates")
+              alert("Mauvaise Coordonnées ! Veuillez verifier l'email ou le mot de passe")
               var d = document.getElementById("wrong");
               if(!d){document.getElementById("wrongholder")!.insertAdjacentHTML('beforeend', '<b style="color: red;" id = "wrong">Email/password invalid</b>');}
             }

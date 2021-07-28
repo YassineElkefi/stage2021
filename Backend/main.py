@@ -8,8 +8,8 @@ from starlette.responses import HTMLResponse
 from reportlab.pdfgen import canvas
 from starlette.responses import FileResponse
 from fastapi.responses import StreamingResponse
-import csv
-
+from datetime import datetime as dt
+from datetime import date as d
 app = FastAPI()
 
 origins = [
@@ -129,17 +129,68 @@ async def db_test(request : Request):
     return json_data
 
 ####################################################################################################################
-#SELECT * FROM depot where DATE(date_envoi)  BETWEEN     '2021-09-07'   AND '2021-12-07'
 @app.get("/selectdepot")
 def search(Client :str, bp:str, service :str, date_s :str, date_e:str):
+    if date_e =="":
+        date_e = d.today().strftime("%Y-%m-%d")
     db = mysql.connector.connect(host = "localhost" , user = "root" , password = "" , database = "stage2021")
     cursor = db.cursor()
-    cursor.execute(f"SELECT * FROM depot where client='{Client}' and bureau='{bp}' and service='{service}' and CAST(date_envoi AS date) BETWEEN '{date_s}' AND '{date_e}'")
+    cursor.execute(f"SELECT * FROM depot")
     row_headers=[x[0] for x in cursor.description]
     rv = cursor.fetchall()
     json_data=[]
     for result in rv:
         json_data.append(dict(zip(row_headers,result)))
+    if(Client=="" and  bp=="" and service=="" and date_s!=""):
+        json_data = [data for data in json_data if ((data["date_envoi"])>dt.strptime(date_s, "%Y-%m-%d")) and (date_e!="") and ((data["date_envoi"])<=dt.strptime(date_e, "%Y-%m-%d"))]
+    if(Client!="" and  bp=="" and service=="" and date_s==""):
+        json_data = [data for data in json_data if (data['client']==int(Client))]
+    if(Client=="" and bp!="" and service=="" and date_s=="" ):
+        json_data = [data for data in json_data if (data['bureau']==int(bp))]
+    if(Client=="" and bp=="" and service!="" and date_s=="" ):
+        json_data = [data for data in json_data if (data['service']==int(service))]
+    if(Client!="" and  bp!="" and service=="" and date_s==""):
+        json_data = [data for data in json_data if (data['client']==int(Client)) and (data['bureau']==int(bp))]
+    if(Client!="" and  bp=="" and service!="" and date_s==""):
+        json_data = [data for data in json_data if (data['client']==int(Client)) and (data['service']==int(service))]
+    if(Client!="" and  bp=="" and service=="" and date_s!=""):
+        json_data = [data for data in json_data if (data['client']==int(Client)) and ((data["date_envoi"])>dt.strptime(date_s, "%Y-%m-%d")) and (date_e!="") and ((data["date_envoi"])<=dt.strptime(date_e, "%Y-%m-%d"))]
+    if(Client=="" and bp!="" and service!="" and date_s=="" ):
+        json_data = [data for data in json_data if (data['bureau']==int(bp)) and (data['service']==int(service))]  
+    if(Client=="" and bp!="" and service=="" and date_s!="" ):
+        json_data = [data for data in json_data if (data['bureau']==int(bp)) and ((data["date_envoi"])>dt.strptime(date_s, "%Y-%m-%d")) and (date_e!="") and ((data["date_envoi"])<=dt.strptime(date_e, "%Y-%m-%d"))]  
+    if(Client=="" and bp=="" and service!="" and date_s!="" ):
+        json_data = [data for data in json_data if (data['service']==int(service)) and ((data["date_envoi"])>dt.strptime(date_s, "%Y-%m-%d")) and (date_e!="") and ((data["date_envoi"])<=dt.strptime(date_e, "%Y-%m-%d")) ]
+    if(Client!="" and bp!="" and service!="" and date_s=="" ):
+        json_data = [data for data in json_data if (data['client']==int(Client)) and (data['bureau']==int(bp)) and (data['service']==int(service))]
+    if(Client!="" and bp!="" and service=="" and date_s!="" ):
+        json_data = [data for data in json_data if (data['client']==int(Client)) and (data['bureau']==int(bp)) and ((data["date_envoi"])>dt.strptime(date_s, "%Y-%m-%d")) and (date_e!="") and ((data["date_envoi"])<=dt.strptime(date_e, "%Y-%m-%d")) ]
+    if(Client!="" and bp=="" and service!="" and date_s!="" ):
+        json_data = [data for data in json_data if (data['client']==int(Client)) and (data['service']==int(service)) and ((data["date_envoi"])>dt.strptime(date_s, "%Y-%m-%d")) and (date_e!="") and ((data["date_envoi"])<=dt.strptime(date_e, "%Y-%m-%d"))]
+    if(Client=="" and bp!="" and service!="" and date_s!=""):
+        json_data = [data for data in json_data if (data['bureau']==int(bp)) and (data['service']==int(service)) and ((data["date_envoi"])>dt.strptime(date_s, "%Y-%m-%d")) and (date_e!="") and ((data["date_envoi"])<=dt.strptime(date_e, "%Y-%m-%d")) ]
+    """
+    json_data = [data for data in json_data if (Client!="") and (data['client']==Client)]
+if(Client="" and )
+    json_data = [data for data in json_data if (bp!="") and (data['bureau']==bp)]
+    json_data = [data for data in json_data if (service!="") and (data['service']==service)]
+    json_data = [data for data in json_data if (date_s!="") and (dt.strpstime(data["date_envoi"], "%y/%m/%d")<dt.strpstime(date_s, "%d/%m/%y")) and (date_e!="") and (dt.strpstime(data["date_envoi"], "%y/%m/%d")>dt.strpstime(date_e, "%d/%m/%y"))]"""
+    """for data in json_data:
+        if (Client!="") and (data['client']!= Client):
+            if (bp!="") and (data['bp'] != bp):
+                if (service!="") and (data['service']!=service):"""
+    for data in json_data:
+        cursor.execute(f"SELECT libelle FROM client where id_client = {data['client']}")
+        nom = cursor.fetchone()[0]
+        data['client'] = nom
+
+        cursor.execute(f"SELECT libelle_service FROM service where id_service = {data['service']}")
+        srv = cursor.fetchone()[0]
+        data['service'] = srv
+
+        cursor.execute(f"SELECT nom_bp FROM bureau_poste where id_bp = {data['bureau']}")
+        bp = cursor.fetchone()[0]
+        data['bureau'] = bp
     return json_data
 #####################################################################################################################
 @app.get("/selectall")
@@ -152,4 +203,16 @@ def search():
     json_data=[]
     for result in rv:
         json_data.append(dict(zip(row_headers,result)))
+    for data in json_data:
+        cursor.execute(f"SELECT libelle FROM client where id_client = {data['client']}")
+        nom = cursor.fetchone()[0]
+        data['client'] = nom
+
+        cursor.execute(f"SELECT libelle_service FROM service where id_service = {data['service']}")
+        srv = cursor.fetchone()[0]
+        data['service'] = srv
+
+        cursor.execute(f"SELECT nom_bp FROM bureau_poste where id_bp = {data['bureau']}")
+        bp = cursor.fetchone()[0]
+        data['bureau'] = bp
     return json_data

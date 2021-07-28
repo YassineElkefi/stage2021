@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 declare const testadd:any
 @Component({
-  selector: 'app-ajout-client',
-  templateUrl: './ajout-client.component.html',
-  styleUrls: ['./ajout-client.component.css']
+  selector: 'app-adminajout',
+  templateUrl: './adminajout.component.html',
+  styleUrls: ['./adminajout.component.css']
 })
-export class AjoutClientComponent implements OnInit {
+export class AdminajoutComponent implements OnInit {
 
   constructor() { }
 

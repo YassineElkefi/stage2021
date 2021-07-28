@@ -13,6 +13,10 @@ import { SupprClientComponent } from './suppr-client/suppr-client.component';
 import { EnvoiDepotComponent } from './envoi-depot/envoi-depot.component';
 import { ConsultComponent } from './consult/consult.component';
 import { InterfaceAdminComponent } from './interface-admin/interface-admin.component';
+import { ConsultallComponent } from './consultall/consultall.component';
+import { ConsultparamComponent } from './consultparam/consultparam.component';
+import { AdminajoutComponent } from './adminajout/adminajout.component';
+import { AdmindepotComponent } from './admindepot/admindepot.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { InterfaceAdminComponent } from './interface-admin/interface-admin.compo
     SupprClientComponent,
     EnvoiDepotComponent,
     ConsultComponent,
-    InterfaceAdminComponent
+    InterfaceAdminComponent,
+    ConsultallComponent,
+    ConsultparamComponent,
+    AdminajoutComponent,
+    AdmindepotComponent
   ],
   imports: [
     FormsModule,

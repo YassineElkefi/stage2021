@@ -56,10 +56,20 @@
                       <input type="text" class="form-control" id="nbre" placeholder="Nombre d'envois">
                     </div>
                     <div>
-                    <button type="submit" class="btn " id="val" style="background-color: #17A2B8;margin-left: 87%; color: white;" (click)="Add()" routerLink="../ajout-client">Ajouter</button>
+                    <button type="submit" class="btn " id="val" style="background-color: #17A2B8;margin-left: 87%; color: white;" (click)="onClick()">Ajouter</button>
                     </div>
                   </form>
             </div>
           </div>
     </div>
+</div>
+<div id="myModal" class="modal">
+ 
+  <!-- Modal content -->
+  <div class="modal-content"  style="width: 500px;">
+    <span class="close">&times;</span>
+    <div id="img"></div>
+    <p id="error"></p>
+  </div>
+
 </div>

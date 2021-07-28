@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 declare const testadde:any
 @Component({
-  selector: 'app-envoi-depot',
-  templateUrl: './envoi-depot.component.html',
-  styleUrls: ['./envoi-depot.component.css']
+  selector: 'app-admindepot',
+  templateUrl: './admindepot.component.html',
+  styleUrls: ['./admindepot.component.css']
 })
-export class EnvoiDepotComponent implements OnInit {
+export class AdmindepotComponent implements OnInit {
 
   constructor() { }
   client:any;

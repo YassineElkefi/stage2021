@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 08, 2021 at 03:14 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.31
+-- Hôte : 127.0.0.1
+-- Généré le : jeu. 21 oct. 2021 à 21:23
+-- Version du serveur : 10.4.11-MariaDB
+-- Version de PHP : 7.2.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `stage2021`
+-- Base de données : `stage2021`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `agent`
+-- Structure de la table `agent`
 --
 
 CREATE TABLE `agent` (
@@ -36,10 +36,18 @@ CREATE TABLE `agent` (
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `agent`
+--
+
+INSERT INTO `agent` (`matricule`, `nom`, `prenom`, `tel_ag`, `mail_ag`, `password`) VALUES
+(1, 'admin', 'admin', '58804932', 'admin@admin.com', 'admin'),
+(2, 'test', 'test', 'test', 'test@test.com', 'test');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bureau_poste`
+-- Structure de la table `bureau_poste`
 --
 
 CREATE TABLE `bureau_poste` (
@@ -50,7 +58,7 @@ CREATE TABLE `bureau_poste` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `bureau_poste`
+-- Déchargement des données de la table `bureau_poste`
 --
 
 INSERT INTO `bureau_poste` (`id_bp`, `nom_bp`, `code_postal`, `region`) VALUES
@@ -1111,11 +1119,11 @@ INSERT INTO `bureau_poste` (`id_bp`, `nom_bp`, `code_postal`, `region`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `client`
+-- Structure de la table `client`
 --
 
 CREATE TABLE `client` (
-  `id` int(11) NOT NULL,
+  `id_client` int(11) NOT NULL,
   `libelle` varchar(100) NOT NULL,
   `telephone` varchar(20) NOT NULL,
   `fax` varchar(20) NOT NULL,
@@ -1124,17 +1132,16 @@ CREATE TABLE `client` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `client`
+-- Déchargement des données de la table `client`
 --
 
-INSERT INTO `client` (`id`, `libelle`, `telephone`, `fax`, `adresse`, `mail`) VALUES
-(1, 'Tunisie Telecom', '71000000', '71030303', 'Av Mohamed V', 'telecom@telcom.tn'),
-(2, 'Orange', '58585858', '71010101', 'Menzah 8', 'orange@orange.tn');
+INSERT INTO `client` (`id_client`, `libelle`, `telephone`, `fax`, `adresse`, `mail`) VALUES
+(1, 'Tunisie Telecom', '58804932', '71010101', 'El mourouj 3, Ben Arous, Tunis', 'test@test.com');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `depot`
+-- Structure de la table `depot`
 --
 
 CREATE TABLE `depot` (
@@ -1147,10 +1154,22 @@ CREATE TABLE `depot` (
   `nombre` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `depot`
+--
+
+INSERT INTO `depot` (`id_depot`, `service`, `bureau`, `client`, `date_envoi`, `montant`, `nombre`) VALUES
+(1, 1, 65, 1, '2021-07-09 16:52:59', 350, 1500),
+(2, 1, 65, 1, '2021-07-09 17:07:49', 350, 7000),
+(3, 1, 1, 1, '2021-07-09 17:21:12', 350, 1500),
+(4, 1, 56, 1, '2021-07-09 19:02:06', 50, 8000),
+(5, 2, 321, 1, '2021-07-12 11:33:57', 50, 11000),
+(6, 1, 65, 1, '2021-07-12 12:08:37', 50, 20);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `region`
+-- Structure de la table `region`
 --
 
 CREATE TABLE `region` (
@@ -1159,7 +1178,7 @@ CREATE TABLE `region` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `region`
+-- Déchargement des données de la table `region`
 --
 
 INSERT INTO `region` (`id_region`, `libelle_region`) VALUES
@@ -1191,7 +1210,7 @@ INSERT INTO `region` (`id_region`, `libelle_region`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `service`
+-- Structure de la table `service`
 --
 
 CREATE TABLE `service` (
@@ -1200,7 +1219,7 @@ CREATE TABLE `service` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `service`
+-- Déchargement des données de la table `service`
 --
 
 INSERT INTO `service` (`id_service`, `libelle_service`) VALUES
@@ -1208,30 +1227,30 @@ INSERT INTO `service` (`id_service`, `libelle_service`) VALUES
 (2, 'Publipostage sans adresse (PSA)');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `agent`
+-- Index pour la table `agent`
 --
 ALTER TABLE `agent`
   ADD PRIMARY KEY (`matricule`);
 
 --
--- Indexes for table `bureau_poste`
+-- Index pour la table `bureau_poste`
 --
 ALTER TABLE `bureau_poste`
   ADD PRIMARY KEY (`id_bp`),
   ADD KEY `FK_REG` (`region`);
 
 --
--- Indexes for table `client`
+-- Index pour la table `client`
 --
 ALTER TABLE `client`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_client`);
 
 --
--- Indexes for table `depot`
+-- Index pour la table `depot`
 --
 ALTER TABLE `depot`
   ADD PRIMARY KEY (`id_depot`),
@@ -1240,73 +1259,73 @@ ALTER TABLE `depot`
   ADD KEY `FK_CLI` (`client`);
 
 --
--- Indexes for table `region`
+-- Index pour la table `region`
 --
 ALTER TABLE `region`
   ADD PRIMARY KEY (`id_region`);
 
 --
--- Indexes for table `service`
+-- Index pour la table `service`
 --
 ALTER TABLE `service`
   ADD PRIMARY KEY (`id_service`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `agent`
+-- AUTO_INCREMENT pour la table `agent`
 --
 ALTER TABLE `agent`
-  MODIFY `matricule` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `matricule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `bureau_poste`
+-- AUTO_INCREMENT pour la table `bureau_poste`
 --
 ALTER TABLE `bureau_poste`
   MODIFY `id_bp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1054;
 
 --
--- AUTO_INCREMENT for table `client`
+-- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `depot`
+-- AUTO_INCREMENT pour la table `depot`
 --
 ALTER TABLE `depot`
-  MODIFY `id_depot` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_depot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `region`
+-- AUTO_INCREMENT pour la table `region`
 --
 ALTER TABLE `region`
   MODIFY `id_region` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `service`
+-- AUTO_INCREMENT pour la table `service`
 --
 ALTER TABLE `service`
   MODIFY `id_service` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `bureau_poste`
+-- Contraintes pour la table `bureau_poste`
 --
 ALTER TABLE `bureau_poste`
   ADD CONSTRAINT `FK_REG` FOREIGN KEY (`region`) REFERENCES `region` (`id_region`);
 
 --
--- Constraints for table `depot`
+-- Contraintes pour la table `depot`
 --
 ALTER TABLE `depot`
   ADD CONSTRAINT `FK_BUR` FOREIGN KEY (`bureau`) REFERENCES `bureau_poste` (`id_bp`),
-  ADD CONSTRAINT `FK_CLI` FOREIGN KEY (`client`) REFERENCES `client` (`id`),
+  ADD CONSTRAINT `FK_CLI` FOREIGN KEY (`client`) REFERENCES `client` (`id_client`),
   ADD CONSTRAINT `FK_SERV` FOREIGN KEY (`service`) REFERENCES `service` (`id_service`);
 COMMIT;
 
